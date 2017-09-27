@@ -8,6 +8,7 @@
 using namespace std;
 
 RunTasks::RunTasks() {  //set local system time at initial run
+	listChanged = false;
 	now = time(0);
 	ltm = localtime(&now);
 	user_dir = getenv("HOME");
@@ -33,9 +34,11 @@ void RunTasks::exec() {
 		case 1:
 			createNewTask();
 			latestMessage = "New task created!";
+			listChanged = true;
 		break;
 		case 2:
 			removeTask();
+			listChanged = true;
 		break;
 		case 3:
 			viewAllTasks();
@@ -43,9 +46,11 @@ void RunTasks::exec() {
 		case 4:
 			sort(allTasks.begin(), allTasks.end());
 			latestMessage = "Tasks Sorted!";
+			listChanged = true;
 		break;
 		case 5:
 			editTask();
+			listChanged = true;
 		break;
 		case 6:
 		break;
@@ -56,6 +61,7 @@ void RunTasks::exec() {
 		case 9:
 			if (saveTasklist("testsave1")) {
 				latestMessage = "Task state saved!";
+				listChanged = false;
 			} else if (allTasks.size() < 1) {
 				latestMessage = "No tasks on list!";
 			} else {

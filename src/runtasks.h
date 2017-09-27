@@ -26,6 +26,10 @@ private:
 	std::time_t now;
 	tm *ltm;
 
+	//auto update interval
+	const int AUTOSAVE = 10; //autosave in 10 seconds
+	bool listChanged;  //changes to true if a save is needed
+
 	std::vector<Task> allTasks;
 
 	std::string latestMessage;  //variable to display the user status updates
